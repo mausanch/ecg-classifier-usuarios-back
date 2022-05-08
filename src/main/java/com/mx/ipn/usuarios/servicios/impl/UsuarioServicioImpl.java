@@ -1,5 +1,7 @@
 package com.mx.ipn.usuarios.servicios.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +23,30 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	@Override
 	public Usuario guardarUsuario(UsuariosBean usuarioBean) {
 		
-		Usuario usuario = usuariosMapeador.UsuarioEntityToUsuarioBean(usuarioBean);
+		Usuario usuario = usuariosMapeador.UsuarioBeanToUsuariosEntity(usuarioBean);
 		usuario=usuarioRepositorio.save(usuario);
 		
 		return usuario;
 	}
 
 	@Override
-	public Usuario obtenerInformacionGeneral(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario obtenerInformacionInicioUsuario(String idUsuario) {
+		
+		Optional<Usuario> opionalUsuario = usuarioRepositorio.findById(idUsuario);
+		
+		if (opionalUsuario.isPresent())
+			idUsuario=null;
+		
+		return opionalUsuario.get();
+	}
+
+	@Override
+	public Usuario actualizarUsuario(UsuariosBean usuarioBean) {
+		
+		Usuario usuario = usuariosMapeador.UsuarioBeanToUsuariosEntity(usuarioBean);
+		usuario=usuarioRepositorio.save(usuario);
+		
+		return usuario;
 	}
 
 }

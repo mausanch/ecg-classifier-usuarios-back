@@ -24,14 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @ToString
 @Slf4j
-public class UsuariosBean implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class MedicoBean implements Serializable{
 
-	private final static Logger log = LoggerFactory.getLogger(UsuariosBean.class);
+	private static final long serialVersionUID = 1L;
+	
+private final static Logger log = LoggerFactory.getLogger(UsuariosBean.class);
 	
 	@Tolerate
-	public UsuariosBean () {
+	public MedicoBean () {
 		log.info("Creando UsuariosBean");
 	}
 	
@@ -60,4 +60,7 @@ public class UsuariosBean implements Serializable{
 	@NotEmpty(message = "La contraseña no puede ser nula" )
 	private String contrasena;
 
+	@NotEmpty(message = "La cedula profesional no puede ser nula" )
+	private String cedula_profesional;
+	
 }

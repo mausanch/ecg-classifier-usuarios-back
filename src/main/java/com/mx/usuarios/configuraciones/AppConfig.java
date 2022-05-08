@@ -9,9 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -32,11 +36,11 @@ import springfox.documentation.service.Contact;
 @Configuration
 @EnableSwagger2
 @EnableSpringDataWebSupport
+@EnableJpaAuditing(auditorAwareRef ="auditorAware")
 @Slf4j
 public class AppConfig implements WebMvcConfigurer{
 
 	private final static Logger log = LoggerFactory.getLogger(UsuariosBean.class);
-	
 
     @SuppressWarnings("deprecation")
 	@Bean
@@ -47,15 +51,16 @@ public class AppConfig implements WebMvcConfigurer{
                 .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE).findAndRegisterModules();
     }
     
-	@Bean
-	public Docket apiDocket() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.mx.ipn.usuarios.controladores"))
-				.paths(PathSelectors.any())
-				.build()
-				;
-	}
+    // Swagger
+    @Bean
+    public Docket apiDocket() {
+        return new Docket(DocumentationType.SWAGGER_2)
+        		.select()
+                .apis(RequestHandlerSelectors
+                		.basePackage("com.mx.usuarios.controladores"))
+                .paths(PathSelectors.any())
+                .build();
+    }
 	
 	@SuppressWarnings("unused")
 	private ApiInfo getApiInfo() {
@@ -70,7 +75,6 @@ public class AppConfig implements WebMvcConfigurer{
 				Collections.emptyList()
 				);
 	}
-	
 	
 	@Bean (name="SimpleDateTime")
 	public SimpleDateFormat simpleDateTimeFormat (){

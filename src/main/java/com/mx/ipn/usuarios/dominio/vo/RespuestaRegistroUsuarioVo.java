@@ -1,7 +1,6 @@
 package com.mx.ipn.usuarios.dominio.vo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -17,11 +16,11 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class HistorialVo implements Serializable {
+public class RespuestaRegistroUsuarioVo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Date fechaAnalisis;
-	private Long idAnalisis;
-	private String resultado;
+	private String mensaje;
+	
+	private String estado;
 }

@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class RespuestaInicioVo {
+public class RespuestaInicioUsuarioVo {
 	private String Nombre;
 	private Integer Edad;
 	private Integer Sexo;

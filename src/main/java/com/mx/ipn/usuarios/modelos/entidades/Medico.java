@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "usuarios")
+@Table(name = "medicos")
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Medico extends Persona {
 

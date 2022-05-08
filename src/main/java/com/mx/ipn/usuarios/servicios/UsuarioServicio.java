@@ -7,6 +7,8 @@ public interface UsuarioServicio {
 	
 	public Usuario guardarUsuario(UsuariosBean usuario);
 
-	public Usuario obtenerInformacionGeneral (Usuario usuario);
+	public Usuario obtenerInformacionInicioUsuario (String idUsuario);
+	
+	public Usuario actualizarUsuario (UsuariosBean usuario);
 	
 }
