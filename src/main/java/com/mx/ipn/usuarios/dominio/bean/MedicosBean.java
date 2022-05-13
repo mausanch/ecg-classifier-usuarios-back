@@ -24,14 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @ToString
 @Slf4j
-public class MedicoBean implements Serializable{
+public class MedicosBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 private final static Logger log = LoggerFactory.getLogger(UsuariosBean.class);
 	
 	@Tolerate
-	public MedicoBean () {
+	public MedicosBean () {
 		log.info("Creando UsuariosBean");
 	}
 	

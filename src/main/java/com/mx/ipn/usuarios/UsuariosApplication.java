@@ -7,15 +7,15 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.mx.ipn.usuarios.controladores.UsuarioControlador;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 
-@SpringBootApplication(scanBasePackages={
-"com.mx.ipn.usuarios", "com.mx.ipn.usuarios.facade"})
-@EnableSwagger2
+@SpringBootApplication (scanBasePackages={
+"com.mx.ipn.usuarios"})
 @ComponentScan(basePackageClasses = {
 	    UsuarioControlador.class
 	})
-
+@OpenAPIDefinition(info = @Info(title = "Usuarios API", version = "1.0", description = "Gestión de Usuarios"))
 public class UsuariosApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
