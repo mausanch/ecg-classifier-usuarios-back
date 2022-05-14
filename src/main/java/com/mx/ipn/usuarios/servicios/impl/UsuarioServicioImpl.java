@@ -17,7 +17,7 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 	
-	@Autowired(required = false)
+	//@Autowired(required = false)
 	private UsuariosMapeador usuariosMapeador;
 
 	@Override
@@ -41,9 +41,11 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	}
 
 	@Override
-	public Usuario actualizarUsuario(UsuariosBean usuarioBean) {
+	public Usuario actualizarUsuario(UsuariosBean usuarioBean, Long idUsuario) {
 		
 		Usuario usuario = usuariosMapeador.UsuarioBeanToUsuariosEntity(usuarioBean);
+		usuario.setIdPersona(idUsuario);
+		
 		usuario=usuarioRepositorio.save(usuario);
 		
 		return usuario;

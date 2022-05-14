@@ -9,7 +9,7 @@ public interface MedicoServicio {
 	
 	public Medico obtenerInformacionMedico(String idMedico);
 	
-	public Medico actualizarMedico (MedicosBean medicoBean); 
+	public Medico actualizarMedico (MedicosBean medicoBean, Long idMedico); 
 	
 	
 }

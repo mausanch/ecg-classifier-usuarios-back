@@ -1,28 +1,22 @@
 package com.mx.usuarios.configuraciones;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.util.StringUtils;
+
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,8 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 @EnableJpaAuditing(auditorAwareRef ="auditorAware")
 @Slf4j
 public class AppConfig implements WebMvcConfigurer{
-
-	private final static Logger log = LoggerFactory.getLogger(UsuariosBean.class);
 
     @SuppressWarnings("deprecation")
 	@Bean

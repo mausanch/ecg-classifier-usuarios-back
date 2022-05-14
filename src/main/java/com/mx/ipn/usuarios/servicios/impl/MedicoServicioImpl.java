@@ -15,13 +15,13 @@ public class MedicoServicioImpl implements MedicoServicio{
 	@Autowired
 	private MedicoRepositorio medicoRepositorio;
 	
-	@Autowired(required = false)
+	//(required = false)
 	private UsuariosMapeador usuariosMapeador;
 
 
 	@Override
 	public Medico guardarMedico(MedicosBean medicoBean) {
-		Medico medico=new Medico();
+		Medico medico=null;
 		
 		medico= usuariosMapeador.MedicosBeanToMedicosEntity(medicoBean);
 		medico=medicoRepositorio.save(medico);
@@ -36,13 +36,13 @@ public class MedicoServicioImpl implements MedicoServicio{
 	}
 
 	@Override
-	public Medico actualizarMedico(MedicosBean medicoBean) {
-		Medico medico=new Medico();
-		
+	public Medico actualizarMedico(MedicosBean medicoBean, Long idMedico) {
+		Medico medico= null;
 		medico= usuariosMapeador.MedicosBeanToMedicosEntity(medicoBean);
+		medico.setIdPersona(idMedico);
 		medico=medicoRepositorio.save(medico);
 		return medico;
+		
 	}
-	
 
 }

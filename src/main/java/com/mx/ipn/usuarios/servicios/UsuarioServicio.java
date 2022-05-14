@@ -6,9 +6,9 @@ import com.mx.ipn.usuarios.modelos.entidades.Usuario;
 public interface UsuarioServicio {
 	
 	public Usuario guardarUsuario(UsuariosBean usuario);
-
-	public Usuario obtenerInformacionInicioUsuario (String idUsuario);
 	
-	public Usuario actualizarUsuario (UsuariosBean usuario);
+	public Usuario actualizarUsuario (UsuariosBean usuario, Long idUsuario);
+
+	public Usuario obtenerInformacionInicioUsuario (String idUsuario);	
 	
 }
