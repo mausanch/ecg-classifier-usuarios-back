@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@SuppressWarnings("deprecation")
 @Getter
 @Setter
 @ToString

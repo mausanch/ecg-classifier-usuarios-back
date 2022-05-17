@@ -9,9 +9,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,8 +25,6 @@ public class UsuariosBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	private final static Logger log = LoggerFactory.getLogger(UsuariosBean.class);
-	
 	@Tolerate
 	public UsuariosBean () {
 		log.info("Creando UsuariosBean");

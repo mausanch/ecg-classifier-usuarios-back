@@ -2,8 +2,6 @@ package com.mx.ipn.usuarios.controladores;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mx.ipn.usuarios.dominio.bean.MedicosBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
 import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
-import com.mx.ipn.usuarios.dominio.vo.RespuestaRegistroVo;
-import com.mx.ipn.usuarios.facade.UsuariosFacade;
 import com.mx.ipn.usuarios.modelos.entidades.Medico;
 import com.mx.ipn.usuarios.modelos.entidades.Usuario;
 import com.mx.ipn.usuarios.servicios.MedicoServicio;
 import com.mx.ipn.usuarios.servicios.UsuarioServicio;
-import com.mx.ipn.usuarios.servicios.impl.MedicoServicioImpl;
-import com.mx.ipn.usuarios.servicios.impl.UsuarioServicioImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,17 +32,17 @@ public class UsuarioControlador {
 	//@Autowired
 	//private UsuariosFacade usuariosFacade;
 	
-	//@Autowired
+	@Autowired
 	private UsuarioServicio usuarioServicio;
 	
-	//@Autowired	
+	@Autowired	
 	private MedicoServicio medicoServicio;
 	
 	@PostMapping(value="/usuario/guardar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Usuario> guardarUsuarios (@Valid @RequestBody UsuariosBean usuariosBean ){
 		log.info("<----- Inicio petición ----->");
-		
+				
 		ResponseEntity<Usuario> resultado = null;
 		
 		Usuario usuario = usuarioServicio.guardarUsuario(usuariosBean);

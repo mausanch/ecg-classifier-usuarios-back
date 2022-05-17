@@ -15,7 +15,7 @@ import com.mx.ipn.usuarios.modelos.entidades.Usuario;
 public interface UsuariosMapeador {
 	
 	UsuariosMapeador INSTANCE = Mappers.getMapper(UsuariosMapeador.class );
-	
+	/*
 	@Mappings({
 	@Mapping(target = "idPersona", ignore = true),
 	@Mapping(target = "nombres", source="nombre"),
@@ -23,14 +23,16 @@ public interface UsuariosMapeador {
 	@Mapping(target = "fechaModificacion", dateFormat = "dd/MM/yyyy HH:mm:ss", ignore = true),
 	@Mapping(target = "AnalisisUsuario", ignore = true),
 	})
+	*/
 	public abstract Usuario UsuarioBeanToUsuariosEntity (UsuariosBean UsuarioBean);
-			
+	/*		
 	@Mappings({
 	@Mapping(target = "idPersona", ignore = true),
 	@Mapping(target = "nombres", source="nombre"),
 	@Mapping(target = "fechaCreacion", dateFormat = "dd/MM/yyyy HH:mm:ss", ignore = true),
 	@Mapping(target = "fechaModificacion", dateFormat = "dd/MM/yyyy HH:mm:ss", ignore = true),
 	})
+	*/
 	public abstract Medico MedicosBeanToMedicosEntity (MedicosBean medicosBean);
 
 }

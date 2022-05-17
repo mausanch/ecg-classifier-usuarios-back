@@ -26,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AppConfig implements WebMvcConfigurer{
 
-    @SuppressWarnings("deprecation")
 	@Bean
     public ObjectMapper objectMapper() {
         log.info("Inicio Log");
