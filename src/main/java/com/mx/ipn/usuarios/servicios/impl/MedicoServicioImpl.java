@@ -15,7 +15,7 @@ public class MedicoServicioImpl implements MedicoServicio{
 	@Autowired
 	private MedicoRepositorio medicoRepositorio;
 	
-	//(required = false)
+	//@Autowired
 	private UsuariosMapeador usuariosMapeador;
 
 

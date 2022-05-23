@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mx.ipn.usuarios.dominio.bean.MedicosBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
+import com.mx.ipn.usuarios.dominio.vo.ListaHistorialVo;
 import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
 import com.mx.ipn.usuarios.modelos.entidades.Medico;
 import com.mx.ipn.usuarios.modelos.entidades.Usuario;
@@ -122,6 +123,17 @@ public class UsuarioControlador {
 		return resultado;
 	}
 	
-
+	@GetMapping("/historial/{id_usuario}")
+	public ResponseEntity <ListaHistorialVo> historialUsuario (@PathVariable("id_usuario") String idUsuario){
+		
+		ResponseEntity <ListaHistorialVo> resultado=null;
+		
+		ListaHistorialVo RespuestaInicioVo = null;
+		
+		resultado = new ResponseEntity <> (RespuestaInicioVo, HttpStatus.OK);
+		
+		return resultado;
+		
+	}
 	
 }
