@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mx.ipn.usuarios.dominio.bean.InicioSesionUsuarioBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
 import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesVo;
-import com.mx.ipn.usuarios.mapeadores.UsuariosMapeador;
+import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
 import com.mx.ipn.usuarios.modelos.entidades.Usuario;
 import com.mx.ipn.usuarios.modelos.repositorios.UsuarioRepositorio;
 import com.mx.ipn.usuarios.servicios.UsuarioServicio;
@@ -71,14 +72,14 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	@Override
 	public Usuario actualizarUsuario(UsuariosBean usuarioBean, Long idUsuario) {
 
-		Optional<Usuario> opionalUsuario = usuarioRepositorio.findById(idUsuario);
+		Optional<Usuario> optionalUsuario = usuarioRepositorio.findById(idUsuario);
 		
-		if (opionalUsuario.isPresent())
+		if (optionalUsuario.isPresent())
 			idUsuario=null;
 				
         Usuario usuario = null;
 
-        usuario = (opionalUsuario.isPresent()) ? opionalUsuario.get()
+        usuario = (optionalUsuario.isPresent()) ? optionalUsuario.get()
         : new Usuario();
 	
 		usuario.setNombres(usuarioBean.getNombre());
@@ -92,6 +93,25 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 		usuario=usuarioRepositorio.save(usuario);
 		
 		return usuario;
+	}
+
+	@Override
+	public RespuestaInicioUsuarioVo InicioSesionUsuario(InicioSesionUsuarioBean inicioSesionUsuarioBean) {
+		
+		RespuestaInicioUsuarioVo respuestaInicioUsuarioVo = null;
+		
+		List<Usuario> listUsuario = usuarioRepositorio.findByCorreoElectronicoAndContrasena(inicioSesionUsuarioBean.getCorreoElectronico(),inicioSesionUsuarioBean.getContrasena());
+		
+		if (listUsuario.isEmpty())
+			return respuestaInicioUsuarioVo;
+		
+		respuestaInicioUsuarioVo = new RespuestaInicioUsuarioVo();
+		respuestaInicioUsuarioVo.setNombre(listUsuario.get(0).getNombres());
+		respuestaInicioUsuarioVo.setIdUsuario(listUsuario.get(0).getIdPersona());
+		respuestaInicioUsuarioVo.setFechaNacimiento(listUsuario.get(0).getFechaNacimiento());
+		respuestaInicioUsuarioVo.setSexo(listUsuario.get(0).getSexo());
+
+		return respuestaInicioUsuarioVo;
 	}
 
 }

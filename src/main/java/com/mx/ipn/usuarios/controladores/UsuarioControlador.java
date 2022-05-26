@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mx.ipn.usuarios.dominio.bean.InicioSesionUsuarioBean;
 import com.mx.ipn.usuarios.dominio.bean.MedicosBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
 import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesVo;
@@ -73,7 +74,7 @@ public class UsuarioControlador {
 		return resultado;
 	}
 	
-	@GetMapping("/inicio/{id_usuario}")
+	@GetMapping("/usuario/inicio/{id_usuario}")
 	public ResponseEntity <RespuestaInicioUsuarioVo> inicioUsuarios (@PathVariable("id_usuario") String idUsuario){
 		
 		ResponseEntity <RespuestaInicioUsuarioVo> resultado=null;
@@ -85,6 +86,46 @@ public class UsuarioControlador {
 		return resultado;
 		
 	}
+
+	@GetMapping("/historial/{id_usuario}")
+	public ResponseEntity <ListaHistorialVo> historialUsuario (@PathVariable("id_usuario") String idUsuario){
+		
+		ResponseEntity <ListaHistorialVo> resultado=null;
+		
+		ListaHistorialVo RespuestaInicioVo = null;
+		
+		resultado = new ResponseEntity <> (RespuestaInicioVo, HttpStatus.OK);
+		
+		return resultado;
+	}
+	
+	@GetMapping("/usuario/datos/{id_usuario}")
+	public ResponseEntity <DatosPersonalesVo> obtenerEdadSexoUsuario (@PathVariable("id_usuario") Long idUsuario){
+		log.info("<----- Inicio petición ----->");
+
+		ResponseEntity <DatosPersonalesVo> resultado=null;
+		
+		DatosPersonalesVo datosPersonalesVo = usuarioServicio.recuperarDatosPersonalesUsuario(idUsuario);
+		
+		resultado = new ResponseEntity <> (datosPersonalesVo, HttpStatus.OK);
+		log.info("<----- Inicio petición ----->");		
+		return resultado;
+	}
+
+	@PostMapping("/usuario/inicio-sesion")
+	public ResponseEntity <RespuestaInicioUsuarioVo> inicioSesion (@RequestBody InicioSesionUsuarioBean inicioSesionUsuarioBean){
+		log.info("<----- Inicio petición ----->");
+
+		ResponseEntity <RespuestaInicioUsuarioVo> resultado=null;
+		
+		RespuestaInicioUsuarioVo respuestaInicioUsuarioVo = usuarioServicio.InicioSesionUsuario(inicioSesionUsuarioBean);
+		
+		
+		resultado = new ResponseEntity <> (respuestaInicioUsuarioVo, HttpStatus.OK);
+		log.info("<----- Inicio petición ----->");		
+		return resultado;
+	}
+
 	
 	@GetMapping("/recuperarDatosAnalisis/{id_usuario}")
 	public ResponseEntity <RespuestaInicioUsuarioVo> recuperarDatosAnalisis (@PathVariable("id_usuario") String idUsuario){
@@ -124,31 +165,5 @@ public class UsuarioControlador {
 		log.info("---Fin petición controlador Usuario----");
 		return resultado;
 	}
-	
-	@GetMapping("/historial/{id_usuario}")
-	public ResponseEntity <ListaHistorialVo> historialUsuario (@PathVariable("id_usuario") String idUsuario){
-		
-		ResponseEntity <ListaHistorialVo> resultado=null;
-		
-		ListaHistorialVo RespuestaInicioVo = null;
-		
-		resultado = new ResponseEntity <> (RespuestaInicioVo, HttpStatus.OK);
-		
-		return resultado;
-	}
-	
-	@GetMapping("/datos/{id_usuario}")
-	public ResponseEntity <DatosPersonalesVo> obtenerEdadSexoUsuario (@PathVariable("id_usuario") Long idUsuario){
-		log.info("<----- Inicio petición ----->");
-
-		ResponseEntity <DatosPersonalesVo> resultado=null;
-		
-		DatosPersonalesVo datosPersonalesVo = usuarioServicio.recuperarDatosPersonalesUsuario(idUsuario);
-		
-		resultado = new ResponseEntity <> (datosPersonalesVo, HttpStatus.OK);
-		log.info("<----- Inicio petición ----->");		
-		return resultado;
-	}
-	
 	
 }
