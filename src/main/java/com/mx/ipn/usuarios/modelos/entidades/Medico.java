@@ -19,14 +19,14 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Medico extends Persona {
 
+	private static final long serialVersionUID = 1L;
+
 	public Medico(Long idPersona, String nombres, String apellidoPaterno, String apellidoMaterno,
 			String correoElectronico, Date fechaNacimiento, Integer sexo, String contrasena) {
 		super(idPersona, nombres, apellidoPaterno, apellidoMaterno, correoElectronico, fechaNacimiento, sexo, contrasena);
 	}
 
-	private static final long serialVersionUID = 1L;
-
-	@Column(name="cedula", nullable= false, length= 10)
+	@Column(name="cedula",length= 10)
 	private String Cedula;
 	
 }
