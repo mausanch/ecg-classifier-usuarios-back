@@ -59,9 +59,10 @@ public class AppConfig implements WebMvcConfigurer{
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/proveedores/**")
-                .allowedOrigins("http://localhost:4200","http://localhost:4201")
-                .allowedMethods("OPTIONS","POST","GET","PUT","PATCH","DELETE");
+				registry.addMapping("/*")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowedHeaders("*");
 			}
 		};
 	}

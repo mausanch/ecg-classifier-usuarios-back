@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,9 +29,10 @@ import com.mx.ipn.usuarios.servicios.UsuarioServicio;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
+@Slf4j
 public class UsuarioControlador {
 	
 	//@Autowired
@@ -98,7 +100,7 @@ public class UsuarioControlador {
 		
 		return resultado;
 	}
-	
+	@CrossOrigin	
 	@GetMapping("/usuario/datos/{id_usuario}")
 	public ResponseEntity <DatosPersonalesVo> obtenerEdadSexoUsuario (@PathVariable("id_usuario") Long idUsuario){
 		log.info("<----- Inicio petición ----->");
@@ -111,18 +113,25 @@ public class UsuarioControlador {
 		log.info("<----- Inicio petición ----->");		
 		return resultado;
 	}
-
+	
+	@CrossOrigin(origins="http://localhost:4200/**")
 	@PostMapping("/usuario/inicio-sesion")
 	public ResponseEntity <RespuestaInicioUsuarioVo> inicioSesion (@RequestBody InicioSesionUsuarioBean inicioSesionUsuarioBean){
 		log.info("<----- Inicio petición ----->");
 
 		ResponseEntity <RespuestaInicioUsuarioVo> resultado=null;
 		
-		RespuestaInicioUsuarioVo respuestaInicioUsuarioVo = usuarioServicio.InicioSesionUsuario(inicioSesionUsuarioBean);
+		RespuestaInicioUsuarioVo  respuestaInicioUsuarioVo = null;
 		
+		respuestaInicioUsuarioVo = usuarioServicio.InicioSesionUsuario(inicioSesionUsuarioBean);
 		
-		resultado = new ResponseEntity <> (respuestaInicioUsuarioVo, HttpStatus.OK);
-		log.info("<----- Inicio petición ----->");		
+		if (respuestaInicioUsuarioVo==null){
+			resultado = new ResponseEntity <> (respuestaInicioUsuarioVo, HttpStatus.UNAUTHORIZED);
+		}else {
+			resultado = new ResponseEntity <> (respuestaInicioUsuarioVo, HttpStatus.OK);
+		}
+		
+		log.info("<----- Fin petición ----->");		
 		return resultado;
 	}
 
