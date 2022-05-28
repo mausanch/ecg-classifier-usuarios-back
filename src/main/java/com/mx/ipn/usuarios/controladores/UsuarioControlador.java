@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mx.ipn.usuarios.dominio.bean.InicioSesionUsuarioBean;
 import com.mx.ipn.usuarios.dominio.bean.MedicosBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
+import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesQuery;
 import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesVo;
-import com.mx.ipn.usuarios.dominio.vo.ListaHistorialVo;
 import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
-import com.mx.ipn.usuarios.facade.UsuariosFacade;
 import com.mx.ipn.usuarios.modelos.entidades.Medico;
 import com.mx.ipn.usuarios.modelos.entidades.Usuario;
 import com.mx.ipn.usuarios.servicios.MedicoServicio;
 import com.mx.ipn.usuarios.servicios.UsuarioServicio;
+import com.mx.ipn.usuarios.utiles.FormatoFechas;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,9 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/usuarios")
 @Slf4j
 public class UsuarioControlador {
-	
-	//@Autowired
-	//private UsuariosFacade usuariosFacade;
 	
 	@Autowired
 	private UsuarioServicio usuarioServicio;
@@ -78,7 +75,7 @@ public class UsuarioControlador {
 	
 	@GetMapping("/usuario/inicio/{id_usuario}")
 	public ResponseEntity <RespuestaInicioUsuarioVo> inicioUsuarios (@PathVariable("id_usuario") String idUsuario){
-		
+		 
 		ResponseEntity <RespuestaInicioUsuarioVo> resultado=null;
 		
 		RespuestaInicioUsuarioVo RespuestaInicioVo = null;
@@ -89,32 +86,26 @@ public class UsuarioControlador {
 		
 	}
 
-	@GetMapping("/historial/{id_usuario}")
-	public ResponseEntity <ListaHistorialVo> historialUsuario (@PathVariable("id_usuario") String idUsuario){
-		
-		ResponseEntity <ListaHistorialVo> resultado=null;
-		
-		ListaHistorialVo RespuestaInicioVo = null;
-		
-		resultado = new ResponseEntity <> (RespuestaInicioVo, HttpStatus.OK);
-		
-		return resultado;
-	}
-	@CrossOrigin	
-	@GetMapping("/usuario/datos/{id_usuario}")
+
+	@GetMapping("/usuario/datos-personales-analisis/{id_usuario}")
 	public ResponseEntity <DatosPersonalesVo> obtenerEdadSexoUsuario (@PathVariable("id_usuario") Long idUsuario){
 		log.info("<----- Inicio petición ----->");
 
 		ResponseEntity <DatosPersonalesVo> resultado=null;
 		
-		DatosPersonalesVo datosPersonalesVo = usuarioServicio.recuperarDatosPersonalesUsuario(idUsuario);
+		DatosPersonalesVo datosPersonalesVo = new DatosPersonalesVo ();
 		
+		DatosPersonalesQuery datosPersonalesQuery = usuarioServicio.recuperarDatosPersonalesUsuario(idUsuario);
+		datosPersonalesVo.setEdad(FormatoFechas.calcularEdad(datosPersonalesQuery.getFechaNacimiento()));
+		datosPersonalesVo.setSexo(datosPersonalesQuery.getSexo());
+		
+		log.info(datosPersonalesVo.toString());		
+
 		resultado = new ResponseEntity <> (datosPersonalesVo, HttpStatus.OK);
 		log.info("<----- Inicio petición ----->");		
 		return resultado;
 	}
 	
-	@CrossOrigin(origins="http://localhost:4200/**")
 	@PostMapping("/usuario/inicio-sesion")
 	public ResponseEntity <RespuestaInicioUsuarioVo> inicioSesion (@RequestBody InicioSesionUsuarioBean inicioSesionUsuarioBean){
 		log.info("<----- Inicio petición ----->");
@@ -135,19 +126,6 @@ public class UsuarioControlador {
 		return resultado;
 	}
 
-	
-	@GetMapping("/recuperarDatosAnalisis/{id_usuario}")
-	public ResponseEntity <RespuestaInicioUsuarioVo> recuperarDatosAnalisis (@PathVariable("id_usuario") String idUsuario){
-		
-		ResponseEntity <RespuestaInicioUsuarioVo> resultado=null;
-		
-		RespuestaInicioUsuarioVo RespuestaInicioVo = null;
-		
-		resultado = new ResponseEntity <> (RespuestaInicioVo, HttpStatus.OK);
-		
-		return resultado;
-		
-	}
 	
 	@PostMapping(value="/medico/guardarMedico")
 	public ResponseEntity<Medico> guardarMedicos (@Valid @RequestBody MedicosBean medicosBean ){

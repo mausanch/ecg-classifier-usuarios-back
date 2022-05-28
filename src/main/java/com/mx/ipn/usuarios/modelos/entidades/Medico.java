@@ -1,6 +1,6 @@
 package com.mx.ipn.usuarios.modelos.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,7 @@ public class Medico extends Persona {
 	private static final long serialVersionUID = 1L;
 
 	public Medico(Long idPersona, String nombres, String apellidoPaterno, String apellidoMaterno,
-			String correoElectronico, Date fechaNacimiento, Integer sexo, String contrasena) {
+			String correoElectronico, LocalDate fechaNacimiento, Integer sexo, String contrasena) {
 		super(idPersona, nombres, apellidoPaterno, apellidoMaterno, correoElectronico, fechaNacimiento, sexo, contrasena);
 	}
 

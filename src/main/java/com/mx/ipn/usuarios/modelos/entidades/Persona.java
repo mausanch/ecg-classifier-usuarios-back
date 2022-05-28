@@ -1,6 +1,7 @@
 package com.mx.ipn.usuarios.modelos.entidades;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -40,7 +41,7 @@ import lombok.Setter;
 public class Persona implements Serializable {
 
 	public Persona(Long idPersona, String nombres, String apellidoPaterno, String apellidoMaterno,
-			String correoElectronico, Date fechaNacimiento,Integer sexo, String contrasena) {
+			String correoElectronico, LocalDate fechaNacimiento,Integer sexo, String contrasena) {
 		super();
 		this.idPersona = idPersona;
 		this.nombres = nombres;
@@ -71,7 +72,7 @@ public class Persona implements Serializable {
 	private String correoElectronico;
 
 	@Column(name = "fecha_nacimiento", nullable = false)
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	
 	@Column(name = "sexo", nullable = false)
 	private Integer sexo;

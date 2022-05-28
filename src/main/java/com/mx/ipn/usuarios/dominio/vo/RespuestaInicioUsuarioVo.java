@@ -1,7 +1,7 @@
 package com.mx.ipn.usuarios.dominio.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -24,6 +24,6 @@ public class RespuestaInicioUsuarioVo implements Serializable{
 	
 	private String Nombre;
 	private Long idUsuario;
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	private Integer Sexo;
 }

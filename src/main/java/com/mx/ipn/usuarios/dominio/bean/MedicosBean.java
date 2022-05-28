@@ -9,6 +9,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @ToString
 @Slf4j
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class MedicosBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

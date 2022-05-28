@@ -19,9 +19,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DatosPersonalesVo implements Serializable{
-
+	
 	private static final long serialVersionUID = 1L;
-
-	private Date fechaNacimiento;
+	private Integer edad;
 	private Integer sexo;
 }

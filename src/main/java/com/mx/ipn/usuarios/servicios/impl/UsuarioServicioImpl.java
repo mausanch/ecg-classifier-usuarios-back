@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mx.ipn.usuarios.dominio.bean.InicioSesionUsuarioBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
-import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesVo;
+import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesQuery;
 import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
 import com.mx.ipn.usuarios.modelos.entidades.Usuario;
 import com.mx.ipn.usuarios.modelos.repositorios.UsuarioRepositorio;
@@ -17,6 +17,7 @@ import com.mx.ipn.usuarios.servicios.UsuarioServicio;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class UsuarioServicioImpl implements UsuarioServicio{
 	
 	@Autowired
@@ -53,18 +54,19 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	}
 	
 	@Override
-	public DatosPersonalesVo recuperarDatosPersonalesUsuario(Long idUsuario) {
+	public DatosPersonalesQuery recuperarDatosPersonalesUsuario(Long idUsuario) {
 		
 		List<Usuario> listUsuario= usuarioRepositorio.findFechaNacimientoAndSexoByIdPersona(idUsuario);
 		
 		if (listUsuario.isEmpty())
 			return null;
+		log.info (listUsuario.toString());
 		
-		DatosPersonalesVo datosPersonalesVo=new DatosPersonalesVo();
-		datosPersonalesVo.setFechaNacimiento(listUsuario.get(0).getFechaNacimiento());
-		datosPersonalesVo.setSexo(listUsuario.get(0).getSexo());
+		DatosPersonalesQuery datosPersonalesQuery=new DatosPersonalesQuery();
+		datosPersonalesQuery.setFechaNacimiento(listUsuario.get(0).getFechaNacimiento());
+		datosPersonalesQuery.setSexo(listUsuario.get(0).getSexo());
 		
-		return datosPersonalesVo;
+		return datosPersonalesQuery;
 
 	}
 

@@ -1,13 +1,16 @@
 package com.mx.ipn.usuarios.dominio.bean;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @ToString
 @Slf4j
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UsuariosBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -40,7 +44,7 @@ public class UsuariosBean implements Serializable{
 	private String apellidoMaterno;
 	
 	@NotEmpty(message = "La fecha de nacimiento no puede ser nula" )
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	
 	@Min(value = 0, message = "El sexo solo puede ser 1 o 0")
     @Max(value = 1, message = "El sexo solo puede ser 1 o 0")

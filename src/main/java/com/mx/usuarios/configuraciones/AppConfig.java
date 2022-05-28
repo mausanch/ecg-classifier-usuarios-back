@@ -53,16 +53,19 @@ public class AppConfig implements WebMvcConfigurer{
     public ModelMapper modelMapper() {
         return new ModelMapper();
     } 
-     
+    
+
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
+   public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/*")
-                .allowedOrigins("*")
-                .allowedMethods("*")
-                .allowedHeaders("*");
+				registry.addMapping("/**")
+               .allowedOrigins("http://localhost:4200","http://127.0.0.1:4200")
+               .allowedMethods("PUT", "DELETE","POST")
+               .allowedHeaders("header1", "header2", "header3")
+               .exposedHeaders("header1", "header2")
+               .allowCredentials(false).maxAge(3600);
 			}
 		};
 	}

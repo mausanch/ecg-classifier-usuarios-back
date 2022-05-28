@@ -1,5 +1,6 @@
 package com.mx.ipn.usuarios.modelos.entidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,7 +13,6 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Tolerate;
 
 @Setter
 @Getter
@@ -23,7 +23,7 @@ import lombok.experimental.Tolerate;
 public class Usuario extends Persona{
 
 	public Usuario(Long idPersona, String nombres, String apellidoPaterno, String apellidoMaterno,
-			String correoElectronico, Date fechaNacimiento,Integer sexo, String contrasena) {
+			String correoElectronico, LocalDate fechaNacimiento,Integer sexo, String contrasena) {
 		super(idPersona, nombres, apellidoPaterno, apellidoMaterno, correoElectronico, fechaNacimiento, sexo, contrasena);
 	}
 
