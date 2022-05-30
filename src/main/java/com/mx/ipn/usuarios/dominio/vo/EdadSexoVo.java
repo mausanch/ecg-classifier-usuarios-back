@@ -1,7 +1,6 @@
 package com.mx.ipn.usuarios.dominio.vo;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -18,10 +17,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DatosPersonalesQuery implements Serializable{
-
+public class EdadSexoVo implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-
-	private LocalDate fechaNacimiento;
+	private Integer edad;
 	private Integer sexo;
 }

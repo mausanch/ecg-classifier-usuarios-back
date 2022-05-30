@@ -1,7 +1,6 @@
 package com.mx.ipn.usuarios.mapeadores;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import com.mx.ipn.usuarios.dominio.bean.MedicosBean;

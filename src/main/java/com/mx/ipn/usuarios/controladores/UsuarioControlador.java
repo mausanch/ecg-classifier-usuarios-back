@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mx.ipn.usuarios.dominio.bean.InicioSesionUsuarioBean;
 import com.mx.ipn.usuarios.dominio.bean.MedicosBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
-import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesQuery;
 import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesVo;
+import com.mx.ipn.usuarios.dominio.vo.EdadSexoQuery;
+import com.mx.ipn.usuarios.dominio.vo.EdadSexoVo;
 import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
 import com.mx.ipn.usuarios.modelos.entidades.Medico;
 import com.mx.ipn.usuarios.modelos.entidades.Usuario;
@@ -87,24 +88,38 @@ public class UsuarioControlador {
 	}
 
 
+	@GetMapping("/usuario/edad-sexo/{id_usuario}")
+	public ResponseEntity <EdadSexoVo> obtenerEdadSexoUsuario (@PathVariable("id_usuario") Long idUsuario){
+		log.info("<----- Inicio petición ----->");
+
+		ResponseEntity <EdadSexoVo> resultado=null;
+		
+		EdadSexoVo edadSexoVo = new EdadSexoVo ();
+		
+		EdadSexoQuery edadSexoQuery = usuarioServicio.recuperarEdadySexoByID(idUsuario);
+		edadSexoVo.setEdad(FormatoFechas.calcularEdad(edadSexoQuery.getFechaNacimiento()));
+		edadSexoVo.setSexo(edadSexoQuery.getSexo());
+		
+		log.info(edadSexoVo.toString());		
+
+		resultado = new ResponseEntity <> (edadSexoVo, HttpStatus.OK);
+		log.info("<----- Fin petición ----->");		
+		return resultado;
+	}
+	
 	@GetMapping("/usuario/datos-personales-analisis/{id_usuario}")
-	public ResponseEntity <DatosPersonalesVo> obtenerEdadSexoUsuario (@PathVariable("id_usuario") Long idUsuario){
+	public ResponseEntity <DatosPersonalesVo> obtenerDatosPersonalesUsuario (@PathVariable("id_usuario") Long idUsuario){
 		log.info("<----- Inicio petición ----->");
 
 		ResponseEntity <DatosPersonalesVo> resultado=null;
 		
-		DatosPersonalesVo datosPersonalesVo = new DatosPersonalesVo ();
-		
-		DatosPersonalesQuery datosPersonalesQuery = usuarioServicio.recuperarDatosPersonalesUsuario(idUsuario);
-		datosPersonalesVo.setEdad(FormatoFechas.calcularEdad(datosPersonalesQuery.getFechaNacimiento()));
-		datosPersonalesVo.setSexo(datosPersonalesQuery.getSexo());
-		
-		log.info(datosPersonalesVo.toString());		
+		DatosPersonalesVo datosPersonalesVo = usuarioServicio.recuperarDatosPersonales(idUsuario);
 
 		resultado = new ResponseEntity <> (datosPersonalesVo, HttpStatus.OK);
 		log.info("<----- Inicio petición ----->");		
 		return resultado;
 	}
+	
 	
 	@PostMapping("/usuario/inicio-sesion")
 	public ResponseEntity <RespuestaInicioUsuarioVo> inicioSesion (@RequestBody InicioSesionUsuarioBean inicioSesionUsuarioBean){

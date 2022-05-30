@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.mx.ipn.usuarios.dominio.bean.InicioSesionUsuarioBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
-import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesQuery;
+import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesVo;
+import com.mx.ipn.usuarios.dominio.vo.EdadSexoQuery;
 import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
 import com.mx.ipn.usuarios.modelos.entidades.Usuario;
 import com.mx.ipn.usuarios.modelos.repositorios.UsuarioRepositorio;
 import com.mx.ipn.usuarios.servicios.UsuarioServicio;
+import com.mx.ipn.usuarios.utiles.FormatoFechas;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +56,7 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	}
 	
 	@Override
-	public DatosPersonalesQuery recuperarDatosPersonalesUsuario(Long idUsuario) {
+	public EdadSexoQuery recuperarEdadySexoByID(Long idUsuario) {
 		
 		List<Usuario> listUsuario= usuarioRepositorio.findFechaNacimientoAndSexoByIdPersona(idUsuario);
 		
@@ -62,11 +64,11 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 			return null;
 		log.info (listUsuario.toString());
 		
-		DatosPersonalesQuery datosPersonalesQuery=new DatosPersonalesQuery();
-		datosPersonalesQuery.setFechaNacimiento(listUsuario.get(0).getFechaNacimiento());
-		datosPersonalesQuery.setSexo(listUsuario.get(0).getSexo());
+		EdadSexoQuery edadSexoQuery=new EdadSexoQuery();
+		edadSexoQuery.setFechaNacimiento(listUsuario.get(0).getFechaNacimiento());
+		edadSexoQuery.setSexo(listUsuario.get(0).getSexo());
 		
-		return datosPersonalesQuery;
+		return edadSexoQuery;
 
 	}
 
@@ -114,6 +116,24 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 		respuestaInicioUsuarioVo.setSexo(listUsuario.get(0).getSexo());
 
 		return respuestaInicioUsuarioVo;
+	}
+
+	@Override
+	public DatosPersonalesVo recuperarDatosPersonales(Long idUsuario) {
+		List<Usuario> listUsuario= usuarioRepositorio.findFechaNacimientoAndSexoByIdPersona(idUsuario);
+		
+		if (listUsuario.isEmpty())
+			return null;
+		log.info (listUsuario.toString());
+		
+		DatosPersonalesVo datosPersonalesVo=new DatosPersonalesVo();
+		datosPersonalesVo.setNombre(listUsuario.get(0).getNombres());
+		datosPersonalesVo.setApellidoMaterno(listUsuario.get(0).getApellidoPaterno());
+		datosPersonalesVo.setApellidoPaterno(listUsuario.get(0).getApellidoPaterno());
+		datosPersonalesVo.setEdad(FormatoFechas.calcularEdad(listUsuario.get(0).getFechaNacimiento()));
+		datosPersonalesVo.setSexo(listUsuario.get(0).getSexo());
+		
+		return datosPersonalesVo;
 	}
 
 }
