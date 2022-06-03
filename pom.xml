@@ -109,38 +109,37 @@
               <version>${lombok.version}</version> 
             </path> 
           </annotationProcessorPaths>  
-          <compilerArgs></compilerArgs> 
+          <compilerArgs/> 
         </configuration> 
       </plugin>  
-
-      <plugin>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>2.2.0</version>
-        <configuration>
-          <schemaVersion>v2</schemaVersion>
-          <subscriptionId>66d77bb2-013f-4eff-8304-2ec29bf6e871</subscriptionId>
-          <resourceGroup>microservicio-usuarios-1654059817625-rg</resourceGroup>
-          <appName>microservicio-usuarios-1654059817625</appName>
-          <pricingTier>F1</pricingTier>
-          <region>centralus</region>
-          <runtime>
-            <os>Linux</os>
-            <javaVersion>Java 11</javaVersion>
-            <webContainer>Java SE</webContainer>
-          </runtime>
-          <deployment>
-            <resources>
-              <resource>
-                <directory>${project.basedir}/target</directory>
-                <includes>
-                  <include>*.jar</include>
-                </includes>
-              </resource>
-            </resources>
-          </deployment>
-        </configuration>
-      </plugin>
+      <plugin> 
+        <groupId>com.microsoft.azure</groupId>  
+        <artifactId>azure-webapp-maven-plugin</artifactId>  
+        <version>2.2.0</version>  
+        <configuration> 
+          <schemaVersion>v2</schemaVersion>  
+          <subscriptionId>66d77bb2-013f-4eff-8304-2ec29bf6e871</subscriptionId>  
+          <resourceGroup>microservicio-usuarios-1654059817625-rg</resourceGroup>  
+          <appName>microservicio-usuarios</appName>  
+          <pricingTier>F1</pricingTier>  
+          <region>centralus</region>  
+          <runtime> 
+            <os>Linux</os>  
+            <javaVersion>Java 11</javaVersion>  
+            <webContainer>Java SE</webContainer> 
+          </runtime>  
+          <deployment> 
+            <resources> 
+              <resource> 
+                <directory>${project.basedir}/target</directory>  
+                <includes> 
+                  <include>*.jar</include> 
+                </includes> 
+              </resource> 
+            </resources> 
+          </deployment> 
+        </configuration> 
+      </plugin> 
     </plugins> 
   </build> 
 </project>
