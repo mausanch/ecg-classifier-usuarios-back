@@ -10,11 +10,13 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
+@ToString
 @Table(name = "medicos")
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Medico extends Persona {

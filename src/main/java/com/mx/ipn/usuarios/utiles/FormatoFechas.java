@@ -7,6 +7,6 @@ public class FormatoFechas {
 
     public static Integer calcularEdad(LocalDate fechaNacimiento){        
     	LocalDate  fechaActual = LocalDate.now();
-        return Period.between(fechaActual, fechaNacimiento).getYears();
+        return Period.between(fechaNacimiento, fechaActual).getYears();
     }
 }

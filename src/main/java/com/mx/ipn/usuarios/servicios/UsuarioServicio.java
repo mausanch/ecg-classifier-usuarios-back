@@ -15,9 +15,12 @@ public interface UsuarioServicio {
 
 	public Usuario obtenerInformacionInicioUsuario (Long idUsuario);	
 	
+	public Usuario obtenerReferenciaUsuario (Long idUsuario);
+	
 	public EdadSexoQuery recuperarEdadySexoByID(Long idUsuario);
 	
 	public DatosPersonalesVo recuperarDatosPersonales (Long idUsuario);
 	
 	public RespuestaInicioUsuarioVo InicioSesionUsuario (InicioSesionUsuarioBean inicioSesionUsuarioBean);
+	
 }

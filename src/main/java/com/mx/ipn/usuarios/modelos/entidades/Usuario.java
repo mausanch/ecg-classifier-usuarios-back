@@ -9,17 +9,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
+@ToString
 @Table(name = "usuarios")
 @PrimaryKeyJoinColumn(name = "persona_id")
-public class Usuario extends Persona{
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Usuario extends Persona {
 
 	public Usuario(Long idPersona, String nombres, String apellidoPaterno, String apellidoMaterno,
 			String correoElectronico, LocalDate fechaNacimiento,Integer sexo, String contrasena) {

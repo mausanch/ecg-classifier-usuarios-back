@@ -142,6 +142,23 @@ public class UsuarioControlador {
 	}
 
 	
+	
+	@GetMapping("/usuario/referencia/{id_usuario}")
+	public ResponseEntity <Usuario> obtenerReferenciaUsuario (@PathVariable("id_usuario") Long idUsuario){
+		log.info("<----- Inicio petición ----->");
+
+		ResponseEntity <Usuario> resultado=null;
+		
+		Usuario  respuestaUsuario = null;
+		
+		respuestaUsuario = usuarioServicio.obtenerReferenciaUsuario(idUsuario);
+		
+		resultado = new ResponseEntity <> (respuestaUsuario, HttpStatus.OK);
+		
+		log.info("<----- Fin petición ----->");		
+		return resultado;
+	}
+
 	@PostMapping(value="/medico/guardarMedico")
 	public ResponseEntity<Medico> guardarMedicos (@Valid @RequestBody MedicosBean medicosBean ){
 		log.info("<----- Inicio petición ----->");

@@ -3,6 +3,9 @@ package com.mx.ipn.usuarios.servicios.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,9 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
+	
+	@PersistenceContext
+	EntityManager entityManager;
 	
 	@Override
 	public Usuario guardarUsuario(UsuariosBean usuarioBean) {
@@ -134,6 +140,14 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 		datosPersonalesVo.setSexo(listUsuario.get(0).getSexo());
 		
 		return datosPersonalesVo;
+	}
+
+	@Override
+	public Usuario obtenerReferenciaUsuario(Long idUsuario) {
+		log.info("<----Inicio servicio Obtener referencia");
+		Usuario usuario = entityManager.find(Usuario.class, idUsuario);
+		log.info("<----Fin servicio Obtener referencia");
+		return usuario;
 	}
 
 }
