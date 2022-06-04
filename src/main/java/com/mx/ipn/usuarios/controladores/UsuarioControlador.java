@@ -19,7 +19,7 @@ import com.mx.ipn.usuarios.dominio.bean.InicioSesionUsuarioBean;
 import com.mx.ipn.usuarios.dominio.bean.MedicosBean;
 import com.mx.ipn.usuarios.dominio.bean.UsuariosBean;
 import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesVo;
-import com.mx.ipn.usuarios.dominio.vo.EdadSexoQuery;
+import com.mx.ipn.usuarios.dominio.vo.DatosPersonalesQuery;
 import com.mx.ipn.usuarios.dominio.vo.EdadSexoVo;
 import com.mx.ipn.usuarios.dominio.vo.RespuestaInicioUsuarioVo;
 import com.mx.ipn.usuarios.modelos.entidades.Medico;
@@ -96,7 +96,7 @@ public class UsuarioControlador {
 		
 		EdadSexoVo edadSexoVo = new EdadSexoVo ();
 		
-		EdadSexoQuery edadSexoQuery = usuarioServicio.recuperarEdadySexoByID(idUsuario);
+		DatosPersonalesQuery edadSexoQuery = usuarioServicio.recuperarEdadySexoByID(idUsuario);
 		edadSexoVo.setEdad(FormatoFechas.calcularEdad(edadSexoQuery.getFechaNacimiento()));
 		edadSexoVo.setSexo(edadSexoQuery.getSexo());
 		
